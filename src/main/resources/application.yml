@@ -1,7 +1,7 @@
 target:
   url: "https://www.harryreidairport.com/flights?scope=arrival"
   css:
-    selector: "[class*='Section_section']"
+    selector: "[class*='FlightsListTable_table__OXs2M']"
 
 screenshot:
   folder : "C:/Users/Tombi/Desktop/ScreenshotsLaAirport"

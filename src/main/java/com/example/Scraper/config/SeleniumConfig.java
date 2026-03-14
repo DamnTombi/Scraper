@@ -23,7 +23,7 @@ public class SeleniumConfig {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
-        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--window-size=1500,3000");
         return new ChromeDriver(options);
     }
 
