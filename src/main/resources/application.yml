@@ -1,0 +1,7 @@
+target:
+  url: "https://www.harryreidairport.com/flights?scope=arrival"
+  css:
+    selector: "[class*='Section_section']"
+
+screenshot:
+  folder : "C:/Users/Tombi/Desktop/ScreenshotsLaAirport"
