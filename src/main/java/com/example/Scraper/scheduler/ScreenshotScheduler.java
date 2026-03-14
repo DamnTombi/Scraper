@@ -6,6 +6,7 @@ import jakarta.annotation.PostConstruct;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScreenshotScheduler {
     private static final Logger log = LoggerFactory.getLogger(FileArchiveService.class);
+    private final ObjectFactory<WebDriver> webDriverFactory;
 
     @PostConstruct
     public void testScreenshot() {
@@ -31,19 +33,19 @@ public class ScreenshotScheduler {
 
 
     private final ScreenshotService screenshotService;
-    private final WebDriver driver;
 
     @Autowired
-    public ScreenshotScheduler(ScreenshotService screenshotService, WebDriver driver) {
-        this.driver = driver;
+    public ScreenshotScheduler(ScreenshotService screenshotService,
+                               ObjectFactory<WebDriver> webDriverFactory) {
         this.screenshotService = screenshotService;
+        this.webDriverFactory = webDriverFactory;
     }
 
     @Scheduled(cron = "0 0 * * * ?")
     public void takeHourlyScreenshot() {
         WebDriver localDriver = null;
         try {
-            localDriver = driver;
+            localDriver = webDriverFactory.getObject();
             screenshotService.captureElement(localDriver, targetUrl, cssSelector);
         }catch (Exception e){
             log.error("Screenshot capture failed",e);

@@ -17,7 +17,7 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROT
 @Configuration
 public class SeleniumConfig {
 
-    @Bean( destroyMethod = "quit")
+    @Bean
     @Scope(SCOPE_PROTOTYPE)
     public WebDriver driver() {
         WebDriverManager.chromedriver().setup();
